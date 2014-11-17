@@ -38,7 +38,7 @@ var ReplyWithWithoutQuote = {
   WITH_QUOTE_ID_SUFFIX    : '-with-quote',
   WITHOUT_QUOTE_ID_SUFFIX : '-without-quote',
 
-  MESSAGE_COMPOSE_WINDOW_INITIALIZED : 'reply-with-without-quote:compose-window-initialized',
+  MESSAGE_COMPOSE_WINDOW_INITIALIZED : 'reply-with-without-quote:compose-editor-initialized',
 
   get currentIdentity() {
     if (!gFolderDisplay.displayedFolder)
@@ -82,8 +82,7 @@ var ReplyWithWithoutQuote = {
   observe : function(aSubject, aTopic, aData) {
     switch (aTopic) {
       case this.MESSAGE_COMPOSE_WINDOW_INITIALIZED:
-        // this must be done with delay, because the editor documet is not initialized yet.
-        setTimeout(this.processRestorationTasks.bind(this), 100);
+        this.processRestorationTasks();
         return;
     }
   },
