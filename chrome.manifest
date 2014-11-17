@@ -2,3 +2,8 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+content	reply-with-without-quote	content/
+locale	reply-with-without-quote	en-US	locale/en-US/
+locale	reply-with-without-quote	ja	locale/ja/
+
+overlay	chrome://messenger/content/msgHdrViewOverlay.xul	chrome://reply-with-without-quote/content/messengerOverlay.xul
