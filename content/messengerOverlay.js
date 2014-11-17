@@ -15,6 +15,14 @@ var ReplyWithWithoutQuote = {
     'hdrReplyButton'
   ],
   MENUITEMS : [
+    'replyMainMenu',
+    'replySenderMainMenu',
+    'menu_replyToAll',
+    'menu_replyToList',
+    'appmenu_replyMainMenu',
+    'appmenu_replySenderMainMenu',
+    'appmenu_replyToAll',
+    'appmenu_replyToList',
     'hdrReplyAll_ReplyAllSubButton',
     'hdrReplySubButton',
     'hdrReplyList_ReplyListSubButton',
@@ -146,6 +154,7 @@ var ReplyWithWithoutQuote = {
     withQuote.setAttribute('oncommand', 'ReplyWithWithoutQuote.onReplyWithQuoteCommand(event)');
     withQuote.removeAttribute('command');
     withQuote.removeAttribute('observes');
+    withQuote.removeAttribute('key');
     withQuote.setAttribute('class', [aItem.getAttribute('class') || '',
                                      this.CLASS_CONTROLLED_ITEM,
                                      this.CLASS_WITH_QUOTE].join(' '));
@@ -158,6 +167,7 @@ var ReplyWithWithoutQuote = {
     withoutQuote.setAttribute('oncommand', 'ReplyWithWithoutQuote.onReplyWithoutQuoteCommand(event)');
     withoutQuote.removeAttribute('command');
     withoutQuote.removeAttribute('observes');
+    withoutQuote.removeAttribute('key');
     withoutQuote.setAttribute('class', [aItem.getAttribute('class') || '',
                                         this.CLASS_CONTROLLED_ITEM,
                                         this.CLASS_WITHOUT_QUOTE].join(' '));
