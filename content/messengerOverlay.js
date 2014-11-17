@@ -82,7 +82,8 @@ var ReplyWithWithoutQuote = {
   observe : function(aSubject, aTopic, aData) {
     switch (aTopic) {
       case this.MESSAGE_COMPOSE_WINDOW_INITIALIZED:
-        this.processRestorationTasks();
+        // this must be done with delay, because the editor documet is not initialized yet.
+        setTimeout(this.processRestorationTasks.bind(this), 100);
         return;
     }
   },
