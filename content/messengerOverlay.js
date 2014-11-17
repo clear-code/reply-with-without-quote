@@ -38,6 +38,8 @@ var ReplyWithWithoutQuote = {
   WITH_QUOTE_ID_SUFFIX    : '-with-quote',
   WITHOUT_QUOTE_ID_SUFFIX : '-without-quote',
 
+  MESSAGE_COMPOSE_WINDOW_INITIALIZED : 'reply-with-without-quote:compose-window-initialized',
+
   get currentIdentity() {
     if (!gFolderDisplay.displayedFolder)
       return null;
@@ -48,9 +50,12 @@ var ReplyWithWithoutQuote = {
     window.addEventListener('unload', this, false);
     this.convertButtonsToMenuButtons();
     this.installExtraMenuItems();
+    Services.obs.addObserver(this, this.MESSAGE_COMPOSE_WINDOW_INITIALIZED, false);
   },
 
   destroy : function() {
+    this.processRestorationTasks();
+    Services.obs.removeObserver(this, this.MESSAGE_COMPOSE_WINDOW_INITIALIZED);
     Array.forEach(document.querySelectorAll('.' + this.CLASS_CONTROLLED_POPUP), function(aPopup) {
       aPopup.removeEventListener('popupshowing', this, false);
     }, this);
@@ -74,11 +79,32 @@ var ReplyWithWithoutQuote = {
     }
   },
 
+  observe : function(aSubject, aTopic, aData) {
+    switch (aTopic) {
+      case this.MESSAGE_COMPOSE_WINDOW_INITIALIZED:
+        this.processRestorationTasks();
+        return;
+    }
+  },
+
+
   getOriginalItem : function(aItem) {
     var id = aItem.getAttribute('data-original-item');
     if (id)
       return document.getElementById(id);
     return null;
+  },
+
+  reserveRestore : function(aRestorationTask) {
+    this.restorationTasks.push(aRestorationTask);
+  },
+  restorationTasks : [],
+
+  processRestorationTasks : function() {
+    this.restorationTasks.forEach(function(aTask) {
+      aTask.call();
+    });
+    this.restorationTasks = [];
   },
 
 
@@ -216,10 +242,9 @@ var ReplyWithWithoutQuote = {
       return;
     var originalState = identity.autoQuote;
     identity.autoQuote = aState;
-    setTimeout(function() {
-      // this should be done after the compose window is completely initialized!
+    this.reserveRestore(function() {
       identity.autoQuote = originalState;
-    }, 100);
+    });
   },
   redirectDoCommand : function(aTarget) {
     var original = this.getOriginalItem(aTarget);
