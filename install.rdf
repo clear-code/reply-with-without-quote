@@ -15,7 +15,7 @@
 
     <em:localized>
       <RDF:Description em:locale="en-US"
-                       em:name="Auto Password Registerer"
+                       em:name="Reply With/Without Quote"
                        em:description="Provides ability to change the option &quot;reply with quote&quot; on replying."
                        em:creator="ClearCode Inc."
                        em:homepageURL="http://www.clear-code.com/">
@@ -24,7 +24,7 @@
 
     <em:localized>
       <RDF:Description em:locale="ja"
-                       em:name="Auto Password Registerer"
+                       em:name="Reply With/Without Quote"
                        em:description="返信する時に、返信に元メッセージの引用を含めるかどうかを選べるようにします。"
                        em:creator="ClearCode Inc."
                        em:homepageURL="http://www.clear-code.com/">
