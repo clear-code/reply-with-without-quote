@@ -7,3 +7,4 @@ locale	reply-with-without-quote	en-US	locale/en-US/
 locale	reply-with-without-quote	ja	locale/ja/
 
 overlay	chrome://messenger/content/msgHdrViewOverlay.xul	chrome://reply-with-without-quote/content/messengerOverlay.xul
+overlay	chrome://messenger/content/messengercompose/messengercompose.xul	chrome://reply-with-without-quote/content/composeOverlay.xul
